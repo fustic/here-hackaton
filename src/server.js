@@ -24,6 +24,8 @@ import schema from './data/schema';
 import routes from './routes';
 import assets from './assets'; // eslint-disable-line import/no-unresolved
 import { port, auth, analytics } from './config';
+import configureStore from './store/configureStore';
+import { setRuntimeVariable } from './actions/runtime';
 
 const app = express();
 
@@ -91,17 +93,26 @@ app.get('*', async (req, res, next) => {
       data.trackingId = analytics.google.trackingId;
     }
 
+    const store = configureStore({});
+
+    store.dispatch(setRuntimeVariable({
+      name: 'initialNow',
+      value: Date.now(),
+    }));
+
     await match(routes, {
       path: req.path,
       query: req.query,
       context: {
         insertCss: styles => css.push(styles._getCss()), // eslint-disable-line no-underscore-dangle
+        store,
         setTitle: value => (data.title = value),
         setMeta: (key, value) => (data[key] = value),
       },
       render(component, status = 200) {
         css = [];
         statusCode = status;
+        data.state = JSON.stringify(store.getState());
         data.body = ReactDOM.renderToString(component);
         data.css = css.join('');
         return true;
