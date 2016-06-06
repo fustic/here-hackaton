@@ -123,6 +123,20 @@ function run() {
   });
 }
 
+/**
+ * Load Service Worker
+ */
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/jsla-sw.js').then(function(reg) {
+    /*
+    if (navigator.serviceWorker.controller) {
+      load();
+    }
+    */
+  });
+}
+
+
 // Run the application when both DOM is ready and page content is loaded
 if (['complete', 'loaded', 'interactive'].includes(document.readyState) && document.body) {
   run();
