@@ -58,14 +58,11 @@ class App extends Component {
     }
 
     const store = this.props.context.store;
+    //{this.props.children}
     return (
       <Provider store={store}>
-        <div>
-          <Header />
-          {this.props.children}
-          <Feedback />
-          <Footer />
-        </div>
+        <div className={s.mapContainer} id="mapContainer"></div>
+
       </Provider>
     );
   }
