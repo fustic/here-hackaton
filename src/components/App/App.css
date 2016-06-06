@@ -24,7 +24,10 @@ html {
   font-family: var(--font-family-base);
   line-height: 1.375; /* ~22px */
 }
-
+html, body, .mapContainer {
+  height: 100%;
+  width: 100%;
+}
 a {
   color: #0074c2;
 }

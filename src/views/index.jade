@@ -7,9 +7,12 @@ html(class="no-js", lang="")
     meta(name="description", description=description)
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="apple-touch-icon", href="apple-touch-icon.png")
+    script(src="//js.api.here.com/v3/3.0/mapsjs-core.js", charset="utf-8")
+    script(src="//js.api.here.com/v3/3.0/mapsjs-service.js", charset="utf-8")
+    script(src="//js.api.here.com/v3/3.0/mapsjs-mapevents.js", charset="utf-8")
+    script(src="//js.api.here.com/v3/3.0/mapsjs-ui.js", charset="utf-8")
+    link(href='//js.api.here.com/v3/3.0/mapsjs-ui.css', rel='stylesheet')
     style#css!= css
   body
-    #app!= body
-    script(src="//js.api.here.com/v3/3.0/mapsjs-core.js")
-    script(src="//js.api.here.com/v3/3.0/mapsjs-service.js")
+    #app(style="height: 100%;width:100%;")!= body
     script#source(src=entry, data-initial-state=state)
