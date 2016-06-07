@@ -64,7 +64,7 @@ class App extends Component {
     if (!navigator.onLine) {
       activeNotification = notificationSystem.addNotification({
         title: 'Status',
-        message: 'Your browser is offline',
+        message: 'Enjoy the privacy of your offline mode...',
         level: 'warning',
         position: 'tc',
         autoDismiss: 0,
@@ -75,6 +75,18 @@ class App extends Component {
 
     if (activeNotification) {
       notificationSystem.removeNotification(activeNotification);
+    }
+
+    // ONLY display ONLINE notification when an event of getting back online is detected
+    if (event) {
+      notificationSystem.addNotification({
+        title: 'Status',
+        message: 'Time to travel the world... Welcome back...',
+        level: 'success',
+        position: 'tc',
+        autoDismiss: 5,
+        dismissible: false
+      });
     }
   }
 
