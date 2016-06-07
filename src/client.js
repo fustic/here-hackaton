@@ -122,6 +122,10 @@ function run() {
 }
 
 /**
+ * ONLINE / OFFLINE STATUS MANAGEMENT
+ */
+
+/**
  * Load Service Worker
  */
 if (navigator.serviceWorker) {
@@ -134,6 +138,9 @@ if (navigator.serviceWorker) {
   });
 }
 
+/**
+ * END - ONLINE / OFFLINE STATUS MANAGEMENT
+ */
 
 // Run the application when both DOM is ready and page content is loaded
 if (['complete', 'loaded', 'interactive'].includes(document.readyState) && document.body) {
