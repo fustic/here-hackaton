@@ -84,7 +84,16 @@ function run() {
   // Make taps on links and buttons work fast on mobiles
   FastClick.attach(document.body);
 
-  context.store = configureStore(initialState, {});
+  const mapState = JSON.parse(
+    window.localStorage.getItem('HERE-MAP-STATE') ||
+    JSON.stringify({
+      zoom: 14,
+      center: { lng: 13.4, lat: 52.51 }
+    })
+  );
+  context.store = configureStore(Object.assign(initialState, {
+    map: { mapState }
+  }), {});
 
   // Re-render the app when window.location changes
   const removeHistoryListener = history.listen(location => {

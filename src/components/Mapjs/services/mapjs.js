@@ -16,12 +16,12 @@ export function getMap() {
   return map;
 }
 
-export default function initMap(element, devicePixelRation) {
+export default function initMap(element, devicePixelRation, store) {
   const platform = getPlatform();
   // Obtain the default map types from the platform object
   const defaultLayers = platform.createDefaultLayers();
 
-  const mapState = JSON.parse(window.localStorage.getItem('HERE-MAP-STATE') || '{}');
+  const mapState = store.getState().map.mapState || {};
 
   map = new H.Map(
     element,
@@ -50,7 +50,7 @@ export default function initMap(element, devicePixelRation) {
   // Instantiate the default behavior, providing the mapEvents object:
   new H.mapevents.Behavior(mapEvents);
 
-  bindEvents(map);
+  bindEvents(map, store);
   setMap(map);
   setUI(ui);
 }

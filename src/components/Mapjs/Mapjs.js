@@ -5,8 +5,12 @@ import mapjs from './services/mapjs';
 
 class Mapjs extends Component {
 
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
   initMap() {
-    mapjs(document.getElementById('mapContainer'), window.devicePixelRatio || 1);
+    mapjs(document.getElementById('mapContainer'), window.devicePixelRatio || 1, this.context.store);
   }
 
   componentDidMount() {
