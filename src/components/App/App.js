@@ -10,7 +10,7 @@
 import React, { Component, PropTypes } from 'react';
 import emptyFunction from 'fbjs/lib/emptyFunction';
 import s from './App.css';
-import Mapjs from '../Mapjs';
+import Mapjs from '../Mapjs/Mapjs';
 import { Provider } from 'react-redux';
 
 class App extends Component {
