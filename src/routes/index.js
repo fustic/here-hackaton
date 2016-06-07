@@ -17,18 +17,21 @@ import login from './login';
 import register from './register';
 import content from './content';
 import error from './error';
+import search from './search.js';
 
 export default {
 
   path: '/',
 
   children: [
+    search,
     home,
     contact,
     login,
     register,
     content,
     error,
+
   ],
 
   async action({ next, render, context }) {
