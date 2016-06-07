@@ -1,3 +1,5 @@
+import { APP_CREDENTIALS } from '../../../constants';
+
 let platform;
 let geocoder;
 
@@ -5,8 +7,8 @@ export function getPlatform() {
   if (!platform) {
     /*jshint camelcase: false */
     platform = new H.service.Platform({
-      app_id: 'inhesa7azejETefrudAC',
-      app_code: 'UP6A4YcFEAgshQMhc-sYsA',
+      app_id: APP_CREDENTIALS.ID,
+      app_code: APP_CREDENTIALS.CODE,
       useHTTPS: location.protocol === 'https:'
     });
   }
