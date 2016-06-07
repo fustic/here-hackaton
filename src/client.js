@@ -15,7 +15,6 @@ import routes from './routes';
 import history from './core/history';
 import configureStore from './store/configureStore';
 import { addEventListener, removeEventListener } from './core/DOMUtils';
-import mapjs from './mapjs/mapjs';
 
 const context = {
   insertCss: styles => styles._insertCss(), // eslint-disable-line no-underscore-dangle
@@ -57,7 +56,6 @@ let renderComplete = (state, callback) => {
 
     callback(true);
   };
-  mapjs(document.getElementById('mapContainer'), window.devicePixelRatio || 1);
 };
 
 function render(container, state, component) {

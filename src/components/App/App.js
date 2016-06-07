@@ -10,9 +10,7 @@
 import React, { Component, PropTypes } from 'react';
 import emptyFunction from 'fbjs/lib/emptyFunction';
 import s from './App.css';
-import Header from '../Header';
-import Feedback from '../Feedback';
-import Footer from '../Footer';
+import Mapjs from '../Mapjs';
 import { Provider } from 'react-redux';
 
 class App extends Component {
@@ -58,11 +56,12 @@ class App extends Component {
     }
 
     const store = this.props.context.store;
-    //{this.props.children}
     return (
       <Provider store={store}>
-        <div className={s.mapContainer} id="mapContainer"></div>
-
+        <div>
+          {this.props.children}
+          <Mapjs />
+        </div>
       </Provider>
     );
   }
