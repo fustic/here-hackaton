@@ -1,4 +1,6 @@
-const staticCacheName = 'jsla-static-v10';     // When making changes, please update the version
+/**
+ * SERVICE WORKER HELPERS
+ */
 const helpers = {};
 const maptilesLimit = 500;
 
@@ -26,6 +28,12 @@ helpers.cleanCache = function(cache) {
     })
    */
 };
+
+
+/**
+ * EVENT LISTENERS FOR SERVICE WORKER
+ */
+const staticCacheName = 'jsla-static-v10';     // When making changes, please update the version
 
 
 /**

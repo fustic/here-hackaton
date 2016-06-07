@@ -12,6 +12,10 @@ import emptyFunction from 'fbjs/lib/emptyFunction';
 import s from './App.css';
 import Mapjs from '../Mapjs/Mapjs';
 import { Provider } from 'react-redux';
+import NotificationSystem from 'react-notification-system';
+
+let notificationSystem = null;
+let activeNotification = null;
 
 class App extends Component {
 
@@ -48,6 +52,37 @@ class App extends Component {
 
   componentWillUnmount() {
     this.removeCss();
+    window.removeEventListener('online', this._addNotification);
+    window.removeEventListener('offline', this._addNotification);
+  }
+
+  _addNotification(event) {
+    if (event) {
+      event.preventDefault();
+    }
+
+    if (!navigator.onLine) {
+      activeNotification = notificationSystem.addNotification({
+        title: 'Status',
+        message: 'Your browser is offline',
+        level: 'warning',
+        position: 'tc',
+        autoDismiss: 0,
+        dismissible: false
+      });
+      return;
+    }
+
+    if (activeNotification) {
+      notificationSystem.removeNotification(activeNotification);
+    }
+  }
+
+  componentDidMount() {
+    notificationSystem = this.refs.notificationSystem;
+    window.addEventListener('online', this._addNotification);
+    window.addEventListener('offline', this._addNotification);
+    this._addNotification();
   }
 
   render() {
@@ -59,6 +94,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div>
+          <NotificationSystem ref="notificationSystem" />
           {this.props.children}
           <Mapjs />
         </div>
