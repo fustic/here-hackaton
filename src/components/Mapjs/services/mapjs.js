@@ -21,15 +21,26 @@ export default function initMap(element, devicePixelRation) {
   // Obtain the default map types from the platform object
   const defaultLayers = platform.createDefaultLayers();
 
+  const mapState = JSON.parse(window.localStorage.getItem('HERE-MAP-STATE') || '{}');
+
   map = new H.Map(
     element,
     defaultLayers.normal.map,
     {
-      zoom: 14,
-      center: { lng: 13.4, lat: 52.51 },
+      zoom: mapState.zoom || 14,
+      center: mapState.center || { lng: 13.4, lat: 52.51 },
       pixelRatio: devicePixelRation
     });
 
+  const mapPadding = map.getViewPort().padding;
+  map
+    .getViewPort()
+    .setPadding(
+      mapPadding.top - 20,
+      mapPadding.right + 20,
+      mapPadding.bottom + 20,
+      mapPadding.left - 20
+    );
   // map.setBaseLayer(defaultLayers.normal.map);
 
   // Enable the event system on the map instance:
