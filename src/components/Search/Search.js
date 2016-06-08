@@ -12,7 +12,7 @@ class Search extends Component {
   }
 
   componentDidMount() {
-    const query = window.location.search.match(/q=([A-z0-9\-_]+)/);
+    const query = window.location.hash.match(/q=([A-z0-9\-_]+)/);
     if (query) {
       this.refs.input.value = query[1];
       this.search(query[1]);
@@ -23,7 +23,7 @@ class Search extends Component {
     const keyCode = e.keyCode;
 
     if (keyCode === 13) {
-      this.search(`q=${this.refs.input.value}`);
+      this.search(this.refs.input.value);
     }
   }
 
@@ -37,7 +37,7 @@ class Search extends Component {
     };
 
     const response = await api.search(query);
-    window.location.search = term;
+    window.location.hash = `?q=${term}`;
     this.context.store.dispatch(searchDataReceived(response, query));
   }
 
