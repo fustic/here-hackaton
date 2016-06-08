@@ -31,27 +31,13 @@
     "passport": "0.3.2",
     "passport-facebook": "2.1.1",
     "pretty-error": "2.0.0",
-<<<<<<< c6729208813193d67280f9d3f1b9b2a4c401d2aa
     "react": "15.1.0",
     "react-dom": "15.1.0",
     "sequelize": "3.23.2",
-=======
-<<<<<<< e2c6501ad0ea0412d35a05d465a319a9fd650f22
-    "react": "15.0.2",
-    "react-dom": "15.0.2",
->>>>>>> Update npm modules; tweak Stylelint settings
     "react-notification-system": "^0.2.7",
     "react-redux": "^4.4.5",
     "redux": "^3.4.0",
     "redux-thunk": "^2.1.0",
-<<<<<<< c6729208813193d67280f9d3f1b9b2a4c401d2aa
-=======
-=======
-    "react": "15.1.0",
-    "react-dom": "15.1.0",
->>>>>>> Update npm modules; tweak Stylelint settings
-    "sequelize": "3.23.2",
->>>>>>> Update npm modules; tweak Stylelint settings
     "source-map-support": "0.4.0",
     "sqlite3": "3.1.4",
     "universal-router": "1.2.1",
