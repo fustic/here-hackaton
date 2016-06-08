@@ -2,6 +2,8 @@ import s from './Mapjs.css';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import React, { Component, PropTypes } from 'react';
 import mapjs from './services/mapjs';
+import { showSearchResults } from './services/markersService';
+import { SEARCH_ACTION } from '../../constants';
 
 class Mapjs extends Component {
 
@@ -15,6 +17,12 @@ class Mapjs extends Component {
 
   componentDidMount() {
     this.initMap();
+    this.context.store.subscribe(() => {
+      const lastAction = this.context.store.getState().lastAction;
+      if (lastAction.type === SEARCH_ACTION) {
+        showSearchResults(lastAction.data);
+      }
+    });
   }
 
   // componentDidUpdate() {

@@ -5,6 +5,7 @@ let polyline;
 let pointLabelBubble;
 let placeLabelBubble;
 let routeGroup;
+let searchResultsGroup = null;
 
 const BUBBLE_STATES = {
   OPEN: 'open',
@@ -20,6 +21,14 @@ function closeRoute() {
     if (routeGroup) {
       map.removeObject(routeGroup);
       routeGroup = null;
+    }
+  }
+}
+function removeMarkers() {
+  if (map) {
+    if (searchResultsGroup) {
+      map.removeObject(searchResultsGroup);
+      searchResultsGroup = null;
     }
   }
 }
@@ -158,7 +167,7 @@ export function showRoute(route) {
   let marker;
   let waypoint;
 
-  routeGroup = new  H.map.Group();
+  routeGroup = new H.map.Group();
   // Add a marker for each maneuver
   for (let i = 0;  i < route.leg.length; i += 1) {
     for (let j = 0;  j < route.leg[i].maneuver.length; j += 1) {
@@ -202,4 +211,14 @@ export function showRoute(route) {
   }, false);
 
   map.addObject(routeGroup);
+}
+
+export function showSearchResults(results = []) {
+  removeMarkers();
+  searchResultsGroup = new H.map.Group();
+  searchResultsGroup.addObjects(results.map((searchResult) => {
+    return new H.map.Marker({lat: searchResult.position[0],
+      lng: searchResult.position[1]})
+  }));
+  map.addObject(searchResultsGroup);
 }
