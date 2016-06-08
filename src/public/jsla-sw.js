@@ -34,7 +34,7 @@ helpers.cleanCache = function (cache) {
 /**
  * EVENT LISTENERS FOR SERVICE WORKER
  */
-const staticCacheName = 'jsla-static-v3';     // When making changes, please update the version
+const staticCacheName = 'jsla-static-v20';     // When making changes, please update the version
 
 
 /**
@@ -80,7 +80,7 @@ self.addEventListener('activate', function (event) {
  */
 self.addEventListener('fetch', function (event) {
   event.respondWith(
-    caches.match(event.request).then(function (response) {
+    caches.match(event.request.url).then(function (response) {
       if (response) {
         return response;
       }
@@ -95,7 +95,7 @@ self.addEventListener('fetch', function (event) {
           });
         }
         return fetchResponse;
-      }).catch(function() {
+      }).catch(function () {
         return { ok: false };
       });
     })
