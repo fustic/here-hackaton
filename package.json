@@ -151,7 +151,7 @@
     }
   },
   "scripts": {
-    "postinstall": "npm run build -- --release --verbose && node build/server.js",
+    "postinstall": "npm run build -- --release --verbose",
     "eslint": "eslint src tools",
     "stylelint": "stylelint \"src/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
