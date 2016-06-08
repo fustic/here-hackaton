@@ -33,7 +33,7 @@ class Search extends Component {
     const state = this.context.store.getState();
     const query = {
       q: term,
-      'X-Map-Viewport': api.transformBoundingBox(state.map.mapState.boundingBox),
+      'X-Map-Viewport': api.transformBoundingBox(state.map.mapState.boundingBoxPBAPI),
     };
 
     const response = await api.search(query);

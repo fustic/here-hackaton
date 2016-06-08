@@ -25,9 +25,4 @@ export async function search(query) {
   return items;
 }
 
-export const transformBoundingBox = (boundingBox) => [
-  boundingBox.getTopLeft().lng.toFixed(4),
-  boundingBox.getBottomRight().lat.toFixed(4),
-  boundingBox.getBottomRight().lng.toFixed(4),
-  boundingBox.getTopLeft().lat.toFixed(4),
-].join(',');
+export const transformBoundingBox = (boundingBox) => (boundingBox || []).join(',');
