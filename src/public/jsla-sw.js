@@ -8,7 +8,8 @@ helpers.isURLCacheable = function (url) {
   const isJSLAMapTile = url.indexOf('/maptile/') > -1;
   const isJSLAVenue = url.indexOf('/venues/signature') > -1;
   const isPBAPI = url.indexOf('/places/v1/') > -1;
-  return isJSLAMapTile || isJSLAVenue || isPBAPI;
+  const isGeocoder = url.indexOf('.geocoder.api.') > -1;
+  return isJSLAMapTile || isJSLAVenue || isPBAPI || isGeocoder;
 };
 
 /**
@@ -33,7 +34,7 @@ helpers.cleanCache = function (cache) {
 /**
  * EVENT LISTENERS FOR SERVICE WORKER
  */
-const staticCacheName = 'jsla-static-v10';     // When making changes, please update the version
+const staticCacheName = 'jsla-static-v3';     // When making changes, please update the version
 
 
 /**
@@ -84,15 +85,18 @@ self.addEventListener('fetch', function (event) {
         return response;
       }
 
-      return fetch(event.request).then(function (response) {
-        if (helpers.isURLCacheable(event.request.url)) {
+      const fetchRequest = event.request.clone();
+      return fetch(fetchRequest).then(function (fetchResponse) {
+        if (helpers.isURLCacheable(fetchRequest.url)) {
           caches.open(staticCacheName).then(function (cache) {
             // Add new file to the cache
-            cache.put(event.request.url, response.clone());
-            helpers.cleanCache(cache);
+            cache.put(event.request.url, fetchResponse.clone());
+            //helpers.cleanCache(cache);
           });
         }
-        return response;
+        return fetchResponse;
+      }).catch(function() {
+        return { ok: false };
       });
     })
   );
