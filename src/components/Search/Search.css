@@ -1,6 +1,22 @@
 .search {
-  position: absolute;
-  z-index: 1;
-  top: 10px;
   left: 10px;
+  position: absolute;
+  top: 10px;
+  z-index: 1;
+}
+
+.input {
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 0px 0px rgba(0,0,0, 0.1);
+  color: #313131;
+  height: 30px;
+  padding: 0 10px;
+  width: 300px;
+  font-size: 12px;
+  outline: none;
+}
+
+.input:focus {
+  outline: none;
 }

@@ -8,6 +8,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
 
+    this.placeholder = 'Search';
     this.onKeyUp = this.onKeyUp.bind(this);
   }
 
@@ -28,7 +29,10 @@ class Search extends Component {
   }
 
   async search(term) {
-    if (!term) return;
+    if (!term) {
+      this.reset();
+      return;
+    }
 
     const state = this.context.store.getState();
     const query = {
@@ -41,10 +45,15 @@ class Search extends Component {
     this.context.store.dispatch(searchDataReceived(response, query));
   }
 
+  reset() {
+    this.context.store.dispatch(searchDataReceived([], ''));
+    window.location.hash = ``;
+  }
+
   render() {
     return (
       <div className={s.search}>
-        <input ref="input" placeholder={this.value} onKeyUp={this.onKeyUp} />
+        <input className={s.input} ref="input" placeholder={this.placeholder} onKeyUp={this.onKeyUp} />
       </div>
     );
   }
